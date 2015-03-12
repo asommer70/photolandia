@@ -18,7 +18,13 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     """Send a directories files."""
-    files = listdir("/Users/adam/Pictures")
+    #files = listdir("/Users/adam/Pictures")
+    pics_dir = "/Users/adam/Pictures/"
+    files = [] 
+    for filename in os.listdir(pics_dir):
+        if (filename[0] != '.' and not os.path.isdir(pics_dir + filename)):
+            info = os.stat(pics_dir + filename)
+            files.append({"file_name": filename, "mtime": info.st_mtime, "size": info.st_size})
 
     return jsonify({"files": files})
 
