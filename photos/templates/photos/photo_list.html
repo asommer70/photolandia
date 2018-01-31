@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}Photos{% endblock %}
+
+{% block body %}
+    <h1>All Photos</h1>
+    <br/>
+    <div class="row">
+      <div class="columns large-12">
+        <ul class="no-bullet">
+          {% for photo in photos %}
+            <li><img src="{{photo.image.url}}" alt="{{photo.image.name}}" /></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+{% endblock %}

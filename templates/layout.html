@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Photolandia | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="columns.small-12.links">
+          <ul class="menu dropdown" data-dropdown-menu>
+            <li>
+              <a href="/">Photolandia</a>
+              <ul class="menu">
+                <li><a href="/photos">All Photos</a></li>
+                <li><a href="/albums">Albums</a></li>
+
+                {% if user.is_authenticated %}
+                  <li>
+                    <a href="/accounts/logout">Logout</a>
+                  </li>
+                {% else %}
+                  <li><a href="/accounts/login">Login</a></li>
+                  <li><a href="/accounts/signup">Signup</a></li>
+                {% endif %}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <br/>
+      <div class="row">
+        <div class="columns small-12">
+          {% if messages %}
+            <div class="row">
+              <div class="columns small-6">
+                {% for message in messages %}
+                  <div class="callout {{message.tags}}" data-closable>
+                    {{message}}
+                    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+          {% block body %}{% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/assets/js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/vendor/mousetrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/vendor/foundation.min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+  </body>
+</html>

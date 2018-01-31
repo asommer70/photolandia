@@ -8,3 +8,5 @@ config.cfg
 
 venv/
 .env
+node_modules/
+assets/js/vendor
