@@ -1,3 +1,13 @@
 @import '../node_modules/foundation-sites/scss/foundation';
 @import 'settings';
 @import 'includes';
+
+body {
+  padding-top: 10px;
+}
+
+img {
+  width: 200px;
+  height: auto;
+  margin: 5px;
+}

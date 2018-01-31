@@ -4800,3 +4800,11 @@ a.thumbnail {
 
 .clearfix::after {
   clear: both; }
+
+body {
+  padding-top: 10px; }
+
+img {
+  width: 200px;
+  height: auto;
+  margin: 5px; }

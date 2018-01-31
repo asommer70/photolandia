@@ -14,3 +14,9 @@ class PhotoListView(LoginRequiredMixin, ListView):
 class PhotoCreateView(LoginRequiredMixin, CreateView):
     fields = ['image']
     model = models.Photo
+
+
+class PhotoCreateView(LoginRequiredMixin, CreateView):
+    fields = ['image']
+    model = models.Photo
+    get_success_url = reverse_lazy('photos:list')
