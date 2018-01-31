@@ -20,6 +20,11 @@
                 <li><a href="/albums">Albums</a></li>
 
                 {% if user.is_authenticated %}
+                  {% if user.is_superuser %}
+                    <li>
+                      <a href="/admin">Admin</a>
+                    </li>
+                  {% endif %}
                   <li>
                     <a href="/accounts/logout">Logout</a>
                   </li>

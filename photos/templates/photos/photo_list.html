@@ -9,7 +9,10 @@
       <div class="columns large-12">
         <ul class="no-bullet">
           {% for photo in photos %}
-            <li><img src="{{photo.image.url}}" alt="{{photo.image.name}}" /></li>
+            <li>
+              <img src="{{photo.image.url}}" alt="{{photo.image.name}}" />
+              <p>Name: {{photo.image.name}}</p>
+            </li>
           {% endfor %}
         </ul>
       </div>
