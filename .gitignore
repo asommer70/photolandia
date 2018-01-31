@@ -5,3 +5,6 @@
 .sass-cache
 config.cfg
 *.pyc
+
+venv/
+.env
