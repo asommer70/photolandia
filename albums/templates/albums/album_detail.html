@@ -11,7 +11,13 @@
   <br/>
 
   <div class="row">
-    pics...
-  </div>
+    {% for photo in album.photo_set.all %}
+      <div class="columns large-4">
+        <a href="{% url 'photos:update' pk=photo.id %}">
+          <img src="{{photo.image.url}}" alt="{{photo.image.name}}" class="thumbnail" />
+        </a>
+        <p>{{photo.caption}}</p>
+      </div>
+    {% endfor %}  </div>
 
 {% endblock %}

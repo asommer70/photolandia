@@ -11,6 +11,10 @@
             <a href="{% url 'albums:detail' pk=album.id %}">
               {{album.name}}
             </a>
+            <br/>
+            <a href="{% url 'albums:detail' pk=album.id %}">
+              <img src="{{ album.photo_set.first.image.url }}" alt="{{album.name}}" />
+            </a>
           </div>
         {% endfor %}
     </div>

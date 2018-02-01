@@ -18,7 +18,7 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
 
 
 class PhotoUpdateView(LoginRequiredMixin, UpdateView):
-    fields = ['image', 'caption']
+    fields = ['image', 'caption', 'albums']
     model = models.Photo
     success_url = reverse_lazy('photos:list')
 
