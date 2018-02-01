@@ -6,8 +6,19 @@ body {
   padding-top: 10px;
 }
 
-img {
+figure {
   width: 200px;
   height: auto;
   margin: 5px;
 }
+
+figcaption {
+  margin: 10px 5px
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// figure {
+//   margin: 5px;
+// }

@@ -6,13 +6,27 @@
     <h1>All Photos</h1>
     <br/>
     <div class="row">
-        {% for photo in photos %}
-          <div class="columns large-4">
-            <a href="{% url 'photos:update' pk=photo.id %}">
-              <img src="{{photo.image.url}}" alt="{{photo.image.name}}" class="thumbnail" />
-            </a>
-            <p>{{photo.caption}}</p>
-          </div>
-        {% endfor %}
+
+    <div class="photos" itemscope itemtype="http://schema.org/ImageGallery">
+      {% for photo in photos %}
+          <figure class="thumbnail" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+              <a href="{{photo.image.url}}" itemprop="contentUrl" data-size="{{photo.image.width}}x{{photo.image.height}}">
+                  <img src="{{photo.image.url}}" itemprop="thumbnail" alt="{{photo.image.name}}" />
+              </a>
+              <figcaption itemprop="caption description">{{photo.caption}}</figcaption>
+          </figure>
+      {% endfor %}
     </div>
+
+    <!-- <script type="text/javascript">
+      window.photos = [
+        {% for photo in photos %}
+          {
+              src: "{{photo.image.url}}",
+              w: {{photo.image.width}},
+              h: {{photo.image.height}}
+          },
+        {% endfor %}
+      ];
+    </script> -->
 {% endblock %}
