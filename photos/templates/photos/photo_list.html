@@ -6,12 +6,13 @@
     <h1>All Photos</h1>
     <br/>
     <div class="row">
-      <div class="columns large-12">
-          {% for photo in photos %}
+        {% for photo in photos %}
+          <div class="columns large-4">
             <a href="{% url 'photos:update' pk=photo.id %}">
               <img src="{{photo.image.url}}" alt="{{photo.image.name}}" class="thumbnail" />
             </a>
-          {% endfor %}
-      </div>
+            <p>{{photo.caption}}</p>
+          </div>
+        {% endfor %}
     </div>
 {% endblock %}

@@ -10,11 +10,6 @@ class PhotoListView(LoginRequiredMixin, ListView):
     context_object_name = 'photos'
     model = models.Photo
 
-#
-# class PhotoCreateView(LoginRequiredMixin, CreateView):
-#     fields = ['image']
-#     model = models.Photo
-
 
 class PhotoCreateView(LoginRequiredMixin, CreateView):
     fields = ['image', 'caption']
@@ -24,5 +19,10 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
 
 class PhotoUpdateView(LoginRequiredMixin, UpdateView):
     fields = ['image', 'caption']
+    model = models.Photo
+    success_url = reverse_lazy('photos:list')
+
+
+class PhotoDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Photo
     success_url = reverse_lazy('photos:list')
