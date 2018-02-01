@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}Albums{% endblock %}
+
+{% block body %}
+    <h1>Albums</h1>
+    <br/>
+    <div class="row">
+        {% for album in albums %}
+          <div class="columns large-4">
+            <a href="{% url 'albums:detail' pk=album.id %}">
+              {{album.name}}
+            </a>
+          </div>
+        {% endfor %}
+    </div>
+{% endblock %}

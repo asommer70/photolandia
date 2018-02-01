@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}Delete Photo{% endblock %}
+
+{% block body %}
+    <h1>Really Delete Photo?</h1>
+    <br/>
+
+    <div class="row">
+      <div class="columns large-4">
+
+        <form method="post">
+          {% csrf_token %}
+          <input type="submit" value="Delete" class="button alert">
+          &nbsp;&nbsp;
+          <a href="{% url 'photos:update' pk=photo.pk %}">Cancel</a>
+        </form>
+
+      </div>
+    </div>
+{% endblock %}

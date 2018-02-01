@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}Album - {{album.name}}{% endblock %}
+
+{% block body %}
+
+  <h1>{{album.name}}</h1>
+  <p>{{album.description}}</p>
+
+  <a href="{% url 'albums:update' pk=album.id %}" class="button small float-right">Edit Album</a>
+  <br/>
+
+  <div class="row">
+    pics...
+  </div>
+
+{% endblock %}

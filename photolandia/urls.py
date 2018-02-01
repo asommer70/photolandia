@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+    path('albums/', include('albums.urls')),
     path('photos/', include('photos.urls')),
     path('admin/', admin.site.urls),
     path('', views.IndexView.as_view()),

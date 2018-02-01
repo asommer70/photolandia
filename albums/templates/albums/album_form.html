@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  {% if not form.instance.pk %}Add Album{% else %}Edit {{form.instance.name}}{% endif %}
+{% endblock %}
+
+{% block body %}
+    <h1>{% if not form.instance.pk %}Add Album{% else %}Edit {{form.instance.name}}{% endif %}</h1>
+    <br/>
+
+    <div class="row">
+      <div class="columns large-4">
+
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{form}}
+          <input type="submit" class="button" value="Save Album" />
+          <a href="{% url 'albums:list' %}"  class="button secondary float-right">Cancel</a>
+        </form>
+        <br/>
+
+        {% if form.instance.pk %}
+          <a href="{% url 'albums:delete' pk=album.id %}" class="float-right button tiny alert">Delete</a>
+        {% endif %}
+      </div>
+    </div>
+{% endblock %}
