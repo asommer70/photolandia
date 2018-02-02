@@ -21,9 +21,6 @@ fs.createReadStream('./node_modules/foundation-sites/dist/js/foundation.min.js')
 fs.createReadStream('./node_modules/jquery/dist/jquery.min.js')
   .pipe(fs.createWriteStream(assets + 'jquery.min.js'));
 
-  fs.createReadStream('./node_modules/mousetrap/mousetrap.min.js')
-    .pipe(fs.createWriteStream(assets + 'mousetrap.min.js'));
-
 fs.createReadStream('./node_modules/photoswipe/dist/photoswipe.min.js')
   .pipe(fs.createWriteStream(assets + 'photoswipe.min.js'));
 

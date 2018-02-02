@@ -19,7 +19,6 @@
   "dependencies": {
     "foundation-sites": "^6.4.4-rc1",
     "jquery": "^3.3.1",
-    "mousetrap": "^1.6.1",
     "ncp": "^2.0.0",
     "photoswipe": "^4.1.2"
   },
