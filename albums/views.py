@@ -24,7 +24,6 @@ class AlbumDetailView(LoginRequiredMixin, DetailView):
 class AlbumUpdateView(LoginRequiredMixin, UpdateView):
     fields = ['name', 'description']
     model = models.Album
-    # success_url = reverse_lazy('albums:detail', args=[self.object.id])
 
 
 class AlbumDeleteView(LoginRequiredMixin, DeleteView):
