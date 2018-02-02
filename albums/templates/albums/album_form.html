@@ -15,7 +15,7 @@
           {% csrf_token %}
           {{form}}
           <input type="submit" class="button" value="Save Album" />
-          <a href="{% url 'albums:list' %}"  class="button secondary float-right">Cancel</a>
+          <a href="{% url 'albums:detail' pk=album.id %}"  class="button secondary float-right">Cancel</a>
         </form>
         <br/>
 
