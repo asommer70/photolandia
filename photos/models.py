@@ -8,5 +8,8 @@ class Photo(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     albums = models.ManyToManyField(Album, blank=True, null=True)
 
+    class Meta:
+        ordering = ['-updated_at']
+
     def __str__(self):
         return self.image.name

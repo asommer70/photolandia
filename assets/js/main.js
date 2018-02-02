@@ -150,10 +150,13 @@ $(document).ready(function() {
                 var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
                     pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
                     rect = thumbnail.getBoundingClientRect();
-
                 return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
-            }
+            },
 
+            // shareButtons: [
+            //   {id: 'update', label: 'Update Image', url: '/photos/' + getImageId(), target: ''},
+            //   {id:'download', label:'Download Image', url:'{{raw_image_url}}', download:true}
+            // ]
         };
 
         // PhotoSwipe opened from URL
