@@ -13,20 +13,8 @@
               <a href="{{photo.image.url}}" itemprop="contentUrl" data-size="{{photo.image.width}}x{{photo.image.height}}">
                   <img src="{{photo.image.url}}" itemprop="thumbnail" alt="{{photo.image.name}}" />
               </a>
-              <figcaption itemprop="caption description">{{photo.caption}}</figcaption>
+              <figcaption itemprop="caption description">{{photo.caption|truncatechars:23}}</figcaption>
           </figure>
       {% endfor %}
     </div>
-
-    <!-- <script type="text/javascript">
-      window.photos = [
-        {% for photo in photos %}
-          {
-              src: "{{photo.image.url}}",
-              w: {{photo.image.width}},
-              h: {{photo.image.height}}
-          },
-        {% endfor %}
-      ];
-    </script> -->
 {% endblock %}
