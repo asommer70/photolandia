@@ -13,9 +13,9 @@
 
     <div class="photos" itemscope itemtype="http://schema.org/ImageGallery">
       {% for photo in album.photo_set.all %}
-          <figure class="thumbnail" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+          <figure class="thumbnail" data-id="{{photo.id}}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
               <a href="{{photo.image.url}}" itemprop="contentUrl" data-size="{{photo.image.width}}x{{photo.image.height}}">
-                  <img src="{{photo.image.url}}" itemprop="thumbnail" alt="{{photo.image.name}}" />
+                  <img src="{{photo.image.url}}" itemprop="thumbnail" alt="{{photo.image.name}}" data-id="{{photo.id}}" />
               </a>
               <figcaption itemprop="caption description">{{photo.caption|truncatechars:23}}</figcaption>
           </figure>
