@@ -1,6 +1,35 @@
 $(document).ready(function() {
   $(document).foundation();
 
+
+  // Figure out a way to select multiple Photos to be added to an Album.
+  // $('.photo').hover(function() {
+  //   // console.log('in $this:', $(this).data().id);
+  //   $(this).find('button').toggleClass("hide");
+  // }, function() {
+  //   // console.log('out $this:', $(this).data().id);
+  //   $(this).find('button').toggleClass("hide");
+  // });
+  // $('.photo').on('dblclick', function() {
+  //   console.log('$(this).data().id:', $(this).data().id);
+  // });
+
+  new DragSelect({
+    selectables: document.querySelectorAll('.photo'),
+    callback: (e) => {
+        console.log(e)
+
+        // Loop through the selected .photo elements.
+        e.forEach((figure) => {
+            console.log('figure.getAttribute(data-id):', figure.getAttribute('data-id'));
+        });
+
+        // Create a popup menu to assign the photos to an album.
+    }
+  });
+
+
+  // Setup the Photoswipe gallery.
   var initPhotoSwipeFromDOM = function(gallerySelector) {
 
     // parse slide data (url, title, size ...) from DOM elements

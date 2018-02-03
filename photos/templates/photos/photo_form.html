@@ -8,6 +8,13 @@
     <h1>{% if not form.instance.pk %}Add Photo{% else %}Edit {{form.instance.image.name}}{% endif %}</h1>
     <br/>
 
+    {% if form.instance.pk %}
+      <small><strong>Uploaded On:</strong> {{photo.created_at|date:"m/d/Y h:m:s"}}</small>
+      <br/>
+    {% endif %}
+
+    <br/>
+
     <div class="row">
       <div class="columns large-4">
 

@@ -3,8 +3,17 @@
 {% block title %}Albums{% endblock %}
 
 {% block body %}
-    <h1>Albums</h1>
-    <br/>
+  <div class="row">
+    <div class="columns 10">
+      <h1>Albums</h1>
+      <br/>
+    </div>
+    <div class="columns 2">
+      <br/>
+      <a href="/albums/unsorted" class="button small float-right">Unsorted</a>
+    </div>
+  </div>
+
     <div class="row">
         {% for album in albums %}
           <div class="columns large-4">

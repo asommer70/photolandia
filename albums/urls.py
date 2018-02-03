@@ -8,4 +8,5 @@ urlpatterns = [
     path('<int:pk>/', views.AlbumDetailView.as_view(), name='detail'),
     path('<int:pk>/edit', views.AlbumUpdateView.as_view(), name='update'),
     path('<int:pk>/delete', views.AlbumDeleteView.as_view(), name='delete'),
+    path('unsorted', views.unsorted, name='unsorted'),
 ]

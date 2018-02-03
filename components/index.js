@@ -27,6 +27,9 @@ fs.createReadStream('./node_modules/photoswipe/dist/photoswipe.min.js')
 fs.createReadStream('./node_modules/photoswipe/dist/photoswipe-ui-default.min.js')
   .pipe(fs.createWriteStream(assets + 'photoswipe-ui-default.min.js'));
 
+fs.createReadStream('./node_modules/dragselect/dist/ds.min.js')
+  .pipe(fs.createWriteStream(assets + 'ds.min.js'));
+
 fs.createReadStream('./node_modules/photoswipe/dist/photoswipe.css')
   .pipe(fs.createWriteStream(cssAssets + 'photoswipe.css'));
 
