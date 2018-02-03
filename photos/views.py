@@ -10,6 +10,7 @@ from . import forms
 class PhotoListView(LoginRequiredMixin, ListView):
     context_object_name = 'photos'
     model = models.Photo
+    paginate_by = 10
 
 
 class PhotoCreateView(LoginRequiredMixin, CreateView):
