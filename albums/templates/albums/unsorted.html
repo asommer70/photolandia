@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}Unsorted Photos{% endblock %}
+
+{% block body %}
+    <h1>Unsorted Photos</h1>
+    <br/>
+
+    <div class="photos" itemscope itemtype="http://schema.org/ImageGallery">
+      {% for photo in photos %}
+          <figure class="thumbnail photo" data-id="{{photo.id}}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+              <a href="{{photo.image.url}}" itemprop="contentUrl"  data-size="{{photo.image.width}}x{{photo.image.height}}">
+                  <img src="{{photo.image.url}}" itemprop="thumbnail" alt="{{photo.image.name}}" data-id="{{photo.id}}"/>
+              </a>
+              <figcaption itemprop="caption description">{{photo.caption|truncatechars:23}}</figcaption>
+              <button class="button tiny hide">&plus;</button>
+          </figure>
+      {% endfor %}
+    </div>
+
+    <br/>
+
+  <ul class="pagination text-center" role="navigation" aria-label="Pagination">
+    {% if photos.has_previous %}
+      <li class="pagination-previous"><a href="?page={{ photos.previous_page_number }}">Previous <span class="show-for-sr">page</span></a></li>
+    {% endif %}
+
+      <li><a href="#" aria-label="Page {{photos.number}}">{{photos.number}}</a></li>
+
+    {% if photos.has_next %}
+      <li class="pagination-next"><a href="?page={{ photos.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+    {% endif %}
+  </ul>
+{% endblock %}

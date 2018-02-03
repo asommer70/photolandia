@@ -21,9 +21,13 @@
               {{album.name}}
             </a>
             <br/>
+            {% if album.photo_set.first %}
             <a href="{% url 'albums:detail' pk=album.id %}">
               <img src="{{ album.photo_set.first.image.url }}" alt="{{album.name}}" />
             </a>
+            {% else %}
+              <p>No photos... yet.</p>
+            {% endif %}
           </div>
         {% endfor %}
     </div>

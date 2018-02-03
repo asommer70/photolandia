@@ -14,20 +14,73 @@ $(document).ready(function() {
   //   console.log('$(this).data().id:', $(this).data().id);
   // });
 
-  new DragSelect({
-    selectables: document.querySelectorAll('.photo'),
-    callback: (e) => {
-        console.log(e)
+  if (typeof token !== 'undefined') {
+    $.ajax({
+        url: '/albums/api',
+        headers: {
+            Authorization: 'Token ' + token,
+            contentType: 'application/json; charset=utf-8',
+        },
+        success: function(data) {
+            console.log('/albums/api data:', data);
+            var albums = data.results;
+            var albumList = '<ul class="no-bullet">';
+            albums.forEach(function(album) {
+                albumList += '<li>';
+                albumList += '<a href="#" class="album-selected" data-id="' + album.id + '">' + album.name + '</a>';
+                albumList += '</li>';
+            });
+            albumList += '</ul>';
+            $('#album-list').append(albumList);
 
-        // Loop through the selected .photo elements.
-        e.forEach((figure) => {
-            console.log('figure.getAttribute(data-id):', figure.getAttribute('data-id'));
-        });
+            $('.album-selected').on('click', function(e) {
+                e.preventDefault();
 
-        // Create a popup menu to assign the photos to an album.
-    }
-  });
+                // Add Photos to album.
+                var albumId = $(this).data().id;
+                var postData = '&photo_ids=' + window.selectedPhotos.toString();
+                postData += '&csrfmiddlewaretoken=' + $('[name="csrfmiddlewaretoken"]').val();
 
+                $.ajax({
+                    url: '/albums/api/' + albumId + '/add_photos',
+                    data: postData,
+                    method: 'post',
+                    success: function(data) {
+                        console.log('add_photos data:', data);
+                        window.location = '/albums/' + albumId;
+                    }
+                });
+            });
+        }
+      })
+
+      new DragSelect({
+        selectables: document.querySelectorAll('.photo'),
+        callback: (e) => {
+            if (e.length > 1) {
+                console.log(e)
+                // Loop through the selected .photo elements.
+                window.selectedPhotos = e.map((figure) => {
+                    console.log('figure.getAttribute(data-id):', figure.getAttribute('data-id'));
+                    return figure.getAttribute('data-id');
+                });
+
+                // TODO:as create a popup menu to assign the photos to an album.
+                // Get a list of Albums via Ajax.
+                // Create a dropdown popup of the Albums.
+                // Do an Ajax POST with an array of Photo IDs to add to an Album.
+                // var albumMenu = new Foundation.Dropdown($('#album-menu'));
+
+                // $('#album-menu').append('The Matrix <br/> Fury Road <br/> The Dude');
+                // $('#album-menu').foundation('open');
+
+                $('#selectModal').foundation('open');
+            }
+        }
+      });
+  
+  }
+  
 
   // Setup the Photoswipe gallery.
   var initPhotoSwipeFromDOM = function(gallerySelector) {

@@ -1,11 +1,18 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
+
 
 from . import models
+from .serializers import AlbumSerializer
+
 from photos.models import Photo
 
 class AlbumListView(LoginRequiredMixin, ListView):
@@ -41,3 +48,30 @@ def unsorted(request):
     page = request.GET.get('page')
     photos = paginator.get_page(page)
     return render(request, 'albums/unsorted.html', {'photos': photos})
+
+
+class ListCreateAlbum(generics.ListCreateAPIView):
+    queryset = models.Album.objects.all()
+    serializer_class = AlbumSerializer
+    authentication_classes = (TokenAuthentication,)
+
+
+class RetrieveUpdateDestroyAlbum(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Album.objects.all()
+    serializer_class = AlbumSerializer
+    authentication_classes = (TokenAuthentication,)
+
+
+@login_required
+def add_photos(request, pk):
+    if request.method == 'POST':
+        album = models.Album.objects.get(id=pk)
+        for photo_id in request.POST['photo_ids'].split(','):
+            print('photo_id:', photo_id)
+            photo = Photo.objects.get(id=photo_id)
+            album.photo_set.add(photo)
+            album.save()
+        return JsonResponse({'message': "Photos have been added to {}.".format(album.name)})
+    else: 
+        return HttpResponseRedirect(reverse('photos:list'))
+
