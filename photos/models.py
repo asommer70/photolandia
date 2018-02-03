@@ -2,7 +2,7 @@ from django.db import models
 from albums.models import Album
 
 class Photo(models.Model):
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True, upload_to='%Y/%m/')
     caption = models.TextField(max_length=2048, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
