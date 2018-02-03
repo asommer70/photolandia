@@ -3,9 +3,14 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
+
 
 from . import models
 from . import forms
+from .serializers import PhotoSerializer
+
 
 class PhotoListView(LoginRequiredMixin, ListView):
     context_object_name = 'photos'
@@ -41,3 +46,15 @@ class PhotoUpdateView(LoginRequiredMixin, UpdateView):
 class PhotoDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Photo
     success_url = reverse_lazy('photos:list')
+
+
+class ListCreatePhoto(generics.ListCreateAPIView):
+    queryset = models.Photo.objects.all()
+    serializer_class = PhotoSerializer
+    authentication_classes = (TokenAuthentication,)
+
+
+class RetrieveUpdateDestroyPhoto(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Photo.objects.all()
+    serializer_class = PhotoSerializer
+    authentication_classes = (TokenAuthentication,)

@@ -1,12 +1,10 @@
 from rest_framework import serializers
 from . import models
-from albums.serializers import AlbumSerializer
+# from albums.serializers import AlbumSerializer
 
 
 class PhotoSerializer(serializers.ModelSerializer):
-	image = serializers.FileField(read_only=True)
-	albums = AlbumSerializer(read_only=True, many=True)
-
+	# albums = AlbumSerializer(read_only=True, many=True)
     class Meta:
         fields = (
             'id',
@@ -16,3 +14,5 @@ class PhotoSerializer(serializers.ModelSerializer):
             'updated_at',
         )
         model = models.Photo
+
+    image = serializers.FileField(read_only=True)
