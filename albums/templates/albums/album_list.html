@@ -17,6 +17,7 @@
     <div class="row">
         {% for album in albums %}
           <div class="columns large-4">
+            <br/>
             <a href="{% url 'albums:detail' pk=album.id %}">
               {{album.name}}
             </a>

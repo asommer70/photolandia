@@ -27,8 +27,6 @@ $(document).ready(function() {
     // Remove multiple photos from an album.
     $('.remove-photos').on('click', function(e) {
         e.preventDefault();
-        console.log('window.selectedPhotos:', window.selectedPhotos);
-
         var albumId = $(this).data().id;
         var postData = '&photo_ids=' + window.selectedPhotos.toString();
         postData += '&csrfmiddlewaretoken=' + $('[name="csrfmiddlewaretoken"]').val();
@@ -92,7 +90,6 @@ $(document).ready(function() {
         selectables: document.querySelectorAll('.photo'),
         callback: (e) => {
             if (e.length > 1) {
-                console.log(e)
                 // Loop through the selected .photo elements and add them to an array on the window object.
                 window.selectedPhotos = e.map((figure) => {
                     return figure.getAttribute('data-id');
