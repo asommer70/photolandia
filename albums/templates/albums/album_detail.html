@@ -13,7 +13,7 @@
 
     <div class="photos" itemscope itemtype="http://schema.org/ImageGallery">
       {% for photo in album.photo_set.all %}
-          <figure class="thumbnail" data-id="{{photo.id}}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+          <figure class="thumbnail photo" data-id="{{photo.id}}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
               <a href="{{photo.image.url}}" itemprop="contentUrl" data-size="{{photo.image.width}}x{{photo.image.height}}">
                   <img src="{{photo.image.url}}" itemprop="thumbnail" alt="{{photo.image.name}}" data-id="{{photo.id}}" />
               </a>
@@ -22,4 +22,22 @@
       {% endfor %}
     </div>
 
+  <div class="reveal" id="selectModal" data-reveal>
+    <h3>Photo Actions</h3>
+
+    <h4>Add To Album</h4>
+    <div id="album-list"></div>
+    {% csrf_token %}
+    <br/>
+
+    <button class="button small">Remove from {{album.name}}</button>
+    <button class="button tiny alert float-right">Delete Photos</button>
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <script type="text/javascript">
+    var token = "{{user.auth_token.key}}";
+  </script>
 {% endblock %}

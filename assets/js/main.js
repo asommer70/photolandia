@@ -22,7 +22,6 @@ $(document).ready(function() {
             contentType: 'application/json; charset=utf-8',
         },
         success: function(data) {
-            console.log('/albums/api data:', data);
             var albums = data.results;
             var albumList = '<ul class="no-bullet">';
             albums.forEach(function(album) {

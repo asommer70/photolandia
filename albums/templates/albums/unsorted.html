@@ -18,6 +18,16 @@
       {% endfor %}
     </div>
 
+    <div class="reveal" id="selectModal" data-reveal>
+      <h3>Add To Album</h3>
+      <div id="album-list"></div>
+      {% csrf_token %}
+      <br/>
+      <button class="button small alert">Delete Photos</button>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <br/>
 
   <ul class="pagination text-center" role="navigation" aria-label="Pagination">
@@ -31,4 +41,8 @@
       <li class="pagination-next"><a href="?page={{ photos.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
     {% endif %}
   </ul>
+
+  <script type="text/javascript">
+    var token = "{{user.auth_token.key}}";
+  </script>
 {% endblock %}
