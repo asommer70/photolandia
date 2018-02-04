@@ -30,7 +30,7 @@ SECRET_KEY = '%5-%2_z5^tw_scyj52(=8ume30r%kc02bm@4qwd2!j*m4j5p_='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'phoots.thehoick.com']
 
 
 # Application definition
@@ -163,3 +163,5 @@ REST_FRAMEWORK = {
         'user': '50/minute'
     }
 }
+
+SITE_ID = 2
