@@ -163,3 +163,6 @@ REST_FRAMEWORK = {
         'user': '50/minute'
     }
 }
+
+
+LOGIN_REDIRECT_URL = "photos:list"
