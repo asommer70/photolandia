@@ -165,3 +165,5 @@ REST_FRAMEWORK = {
 }
 
 SITE_ID = 2
+
+LOGIN_REDIRECT_URL = "photos:list"
