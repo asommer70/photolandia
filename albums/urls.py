@@ -13,4 +13,5 @@ urlpatterns = [
     path('api', views.ListCreateAlbum.as_view(), name="albums"),
     path('api/<int:pk>', views.RetrieveUpdateDestroyAlbum.as_view(), name="album"),
     path('api/<int:pk>/add_photos', views.add_photos, name="api_add_photos"),
+    path('api/<int:pk>/remove_photos', views.remove_photos, name="api_remove_photos"),
 ]

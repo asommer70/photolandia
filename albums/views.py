@@ -75,3 +75,16 @@ def add_photos(request, pk):
     else: 
         return HttpResponseRedirect(reverse('photos:list'))
 
+
+@login_required
+def remove_photos(request, pk):
+    if request.method == 'POST':
+        album = models.Album.objects.get(id=pk)
+        for photo_id in request.POST['photo_ids'].split(','):
+            print('photo_id:', photo_id)
+            photo = Photo.objects.get(id=photo_id)
+            album.photo_set.remove(photo)
+            album.save()
+        return JsonResponse({'message': "Photos have been removed from {}.".format(album.name)})
+    else: 
+        return HttpResponseRedirect(reverse('album:detail', args=[pk]))

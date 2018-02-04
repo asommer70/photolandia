@@ -6,7 +6,6 @@ $(document).ready(function() {
     // Delete multiple photos.
     $('.delete-photos').on('click', function(e) {
         e.preventDefault();
-        console.log('window.selectedPhotos:', window.selectedPhotos);
         window.selectedPhotos.forEach(function(photo, idx) {
             $.ajax({
                 url: '/photos/api/' + photo,
@@ -20,6 +19,32 @@ $(document).ready(function() {
                     if (window.selectedPhotos.length == idx + 1) {
                         window.location.reload();
                     }
+                }
+            });
+        });
+    });
+
+    // Remove multiple photos from an album.
+    $('.remove-photos').on('click', function(e) {
+        e.preventDefault();
+        console.log('window.selectedPhotos:', window.selectedPhotos);
+
+        var albumId = $(this).data().id;
+        var postData = '&photo_ids=' + window.selectedPhotos.toString();
+        postData += '&csrfmiddlewaretoken=' + $('[name="csrfmiddlewaretoken"]').val();
+
+        window.selectedPhotos.forEach(function(photo, idx) {
+            $.ajax({
+                url: '/albums/api/' + albumId + '/remove_photos',
+                method: 'post',
+                data: postData,
+                headers: {
+                    Authorization: 'Token ' + token,
+                    contentType: 'application/json; charset=utf-8',
+                },
+                success: function(data) {
+                    console.log('removed-photos data:', data);
+                    window.location.reload();
                 }
             });
         });
