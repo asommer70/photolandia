@@ -2,19 +2,29 @@ $(document).ready(function() {
   $(document).foundation();
 
 
-  // Figure out a way to select multiple Photos to be added to an Album.
-  // $('.photo').hover(function() {
-  //   // console.log('in $this:', $(this).data().id);
-  //   $(this).find('button').toggleClass("hide");
-  // }, function() {
-  //   // console.log('out $this:', $(this).data().id);
-  //   $(this).find('button').toggleClass("hide");
-  // });
-  // $('.photo').on('dblclick', function() {
-  //   console.log('$(this).data().id:', $(this).data().id);
-  // });
-
   if (typeof token !== 'undefined') {
+    // Delete multiple photos.
+    $('.delete-photos').on('click', function(e) {
+        e.preventDefault();
+        console.log('window.selectedPhotos:', window.selectedPhotos);
+        window.selectedPhotos.forEach(function(photo, idx) {
+            $.ajax({
+                url: '/photos/api/' + photo,
+                method: 'delete',
+                headers: {
+                    Authorization: 'Token ' + token,
+                    contentType: 'application/json; charset=utf-8',
+                },
+                success: function(data) {
+                    console.log('deleted ID: ' + photo + ' data:', data);
+                    if (window.selectedPhotos.length == idx + 1) {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    });
+
     $.ajax({
         url: '/albums/api',
         headers: {
@@ -58,21 +68,12 @@ $(document).ready(function() {
         callback: (e) => {
             if (e.length > 1) {
                 console.log(e)
-                // Loop through the selected .photo elements.
+                // Loop through the selected .photo elements and add them to an array on the window object.
                 window.selectedPhotos = e.map((figure) => {
-                    console.log('figure.getAttribute(data-id):', figure.getAttribute('data-id'));
                     return figure.getAttribute('data-id');
                 });
 
-                // TODO:as create a popup menu to assign the photos to an album.
-                // Get a list of Albums via Ajax.
-                // Create a dropdown popup of the Albums.
-                // Do an Ajax POST with an array of Photo IDs to add to an Album.
-                // var albumMenu = new Foundation.Dropdown($('#album-menu'));
-
-                // $('#album-menu').append('The Matrix <br/> Fury Road <br/> The Dude');
-                // $('#album-menu').foundation('open');
-
+                // Open the selectModal.
                 $('#selectModal').foundation('open');
             }
         }
