@@ -6,22 +6,24 @@ $(document).ready(function() {
     // Delete multiple photos.
     $('.delete-photos').on('click', function(e) {
         e.preventDefault();
-        window.selectedPhotos.forEach(function(photo, idx) {
-            $.ajax({
-                url: '/photos/api/' + photo,
-                method: 'delete',
-                headers: {
-                    Authorization: 'Token ' + token,
-                    contentType: 'application/json; charset=utf-8',
-                },
-                success: function(data) {
-                    console.log('deleted ID: ' + photo + ' data:', data);
-                    if (window.selectedPhotos.length == idx + 1) {
-                        window.location.reload();
+        if (window.confirm("Really delete these photos?")) {
+            window.selectedPhotos.forEach(function(photo, idx) {
+                $.ajax({
+                    url: '/photos/api/' + photo,
+                    method: 'delete',
+                    headers: {
+                        Authorization: 'Token ' + token,
+                        contentType: 'application/json; charset=utf-8',
+                    },
+                    success: function(data) {
+                        console.log('deleted ID: ' + photo + ' data:', data);
+                        if (window.selectedPhotos.length == idx + 1) {
+                            window.location.reload();
+                        }
                     }
-                }
+                });
             });
-        });
+        }
     });
 
     // Remove multiple photos from an album.
