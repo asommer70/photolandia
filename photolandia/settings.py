@@ -30,7 +30,7 @@ SECRET_KEY = '%5-%2_z5^tw_scyj52(=8ume30r%kc02bm@4qwd2!j*m4j5p_='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'phoots.thehoick.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'phoots.thehoick.com', 'gallium']
 
 
 # Application definition
@@ -167,3 +167,4 @@ REST_FRAMEWORK = {
 SITE_ID = 2
 
 LOGIN_REDIRECT_URL = "photos:list"
+LOGIN_URL = '/login'
