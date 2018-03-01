@@ -5,10 +5,13 @@ from . import models
 
 class PhotoSerializer(serializers.ModelSerializer):
 	# albums = AlbumSerializer(read_only=True, many=True)
+    filename = serializers.ReadOnlyField()
+
     class Meta:
         fields = (
             'id',
             'image',
+            'filename',
             'caption',
             'created_at',
             'updated_at',
