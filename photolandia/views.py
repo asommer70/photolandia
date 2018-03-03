@@ -15,7 +15,7 @@ class IndexView(generic.RedirectView):
         return super().get(request, *args, **kwargs)
 
 
-@csrf_exempt  
+@csrf_exempt
 def api_login(request):
 	if request.method == 'POST':
 		user = authenticate(username=request.POST['username'], password=request.POST['password'])

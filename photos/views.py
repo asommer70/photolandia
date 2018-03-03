@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
+from django.views.decorators.csrf import csrf_exempt
 
 
 from . import models
@@ -52,9 +53,10 @@ class ListCreatePhoto(generics.ListCreateAPIView):
     queryset = models.Photo.objects.all()
     serializer_class = PhotoSerializer
     authentication_classes = (TokenAuthentication,)
-
+    
 
 class RetrieveUpdateDestroyPhoto(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Photo.objects.all()
     serializer_class = PhotoSerializer
     authentication_classes = (TokenAuthentication,)
+

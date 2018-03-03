@@ -9,7 +9,10 @@ class Photo(models.Model):
     albums = models.ManyToManyField(Album, blank=True, null=True)
 
     def filename(self):
-    	return self.image.name.split('/')[-1]
+    	if self.image:
+    		return self.image.name.split('/')[-1]
+    	else:
+    		return False
 
     class Meta:
         ordering = ['-updated_at']
