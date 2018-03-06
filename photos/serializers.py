@@ -5,7 +5,7 @@ from albums.models import Album
 
 
 class PhotoSerializer(serializers.ModelSerializer):
-    albums = AlbumSerializer(many=True)
+    # albums = AlbumSerializer(many=True)
 
     class Meta:
         fields = (

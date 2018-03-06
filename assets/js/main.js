@@ -79,6 +79,10 @@ $(document).ready(function() {
                     url: '/albums/api/' + albumId + '/add_photos',
                     data: postData,
                     method: 'post',
+                    headers: {
+                        Authorization: 'Token ' + token,
+                        contentType: 'application/json; charset=utf-8',
+                    },
                     success: function(data) {
                         console.log('add_photos data:', data);
                         window.location = '/albums/' + albumId;
