@@ -50,6 +50,7 @@ $(document).ready(function() {
         });
     });
 
+    // Add multiple Photos to an Album.
     $.ajax({
         url: '/albums/api',
         headers: {

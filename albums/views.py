@@ -69,9 +69,7 @@ class RetrieveUpdateDestroyAlbum(generics.RetrieveUpdateDestroyAPIView):
 def add_photos(request, pk):
     if request.method == 'POST':
         req_token = request.META['HTTP_AUTHORIZATION'].split(" ")[1]
-        print('req_token:', req_token)
         token = Token.objects.get(key=req_token)
-        print('token:', token)
 
         if not token:
             return HttpResponseRedirect(reverse('photos:list'))
@@ -87,15 +85,21 @@ def add_photos(request, pk):
         return HttpResponseRedirect(reverse('photos:list'))
 
 
-@login_required
+@csrf_exempt
 def remove_photos(request, pk):
     if request.method == 'POST':
-        album = models.Album.objects.get(id=pk)
-        for photo_id in request.POST['photo_ids'].split(','):
-            print('photo_id:', photo_id)
-            photo = Photo.objects.get(id=photo_id)
-            album.photo_set.remove(photo)
-            album.save()
-        return JsonResponse({'message': "Photos have been removed from {}.".format(album.name)})
+        req_token = request.META['HTTP_AUTHORIZATION'].split(" ")[1]
+        token = Token.objects.get(key=req_token)
+
+        if not token:
+            return HttpResponseRedirect(reverse('photos:list'))
+        else:
+            album = models.Album.objects.get(id=pk)
+            for photo_id in request.POST['photo_ids'].split(','):
+                print('photo_id:', photo_id)
+                photo = Photo.objects.get(id=photo_id)
+                album.photo_set.remove(photo)
+                album.save()
+            return JsonResponse({'message': "Photos have been removed from {}.".format(album.name)})
     else: 
         return HttpResponseRedirect(reverse('album:detail', args=[pk]))
