@@ -23,11 +23,13 @@
             </a>
             <br/>
             {% if album.photo_set.first %}
-            <a href="{% url 'albums:detail' pk=album.id %}">
-              <img src="{{ album.photo_set.first.image.url }}" alt="{{album.name}}" />
-            </a>
+              <a href="{% url 'albums:detail' pk=album.id %}">
+                <img src="{{ album.photo_set.first.image.url }}" alt="{{album.name}}" />
+              </a>
             {% else %}
-              <p>No photos... yet.</p>
+              <a href="{% url 'albums:detail' pk=album.id %}">
+                <img src="https://via.placeholder.com/150x250?text=No photo... yet." alt="{{album.name}}" />
+              </a>
             {% endif %}
           </div>
         {% endfor %}

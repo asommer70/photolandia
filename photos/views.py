@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from django.views.decorators.csrf import csrf_exempt
@@ -19,10 +20,11 @@ class PhotoListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
 
-class PhotoCreateView(LoginRequiredMixin, CreateView):
+class PhotoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     fields = ['image']
     model = models.Photo
     success_url = reverse_lazy('photos:list')
+    success_message = "Photo created."
 
     def get_form(self):
         return forms.MultiPhotoForm
@@ -38,15 +40,17 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
             return self.form_invalid(form)
 
 
-class PhotoUpdateView(LoginRequiredMixin, UpdateView):
+class PhotoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['image', 'caption', 'albums']
     model = models.Photo
     success_url = reverse_lazy('photos:list')
+    success_message = "Photo updated."
 
 
-class PhotoDeleteView(LoginRequiredMixin, DeleteView):
+class PhotoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = models.Photo
     success_url = reverse_lazy('photos:list')
+    success_message = "Photo deleted."
 
 
 class ListCreatePhoto(generics.ListCreateAPIView):

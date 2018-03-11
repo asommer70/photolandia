@@ -4,13 +4,14 @@ from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
-
+import json
 
 from . import models
 from .serializers import AlbumSerializer
@@ -22,25 +23,27 @@ class AlbumListView(LoginRequiredMixin, ListView):
     model = models.Album
 
 
-class AlbumCreateView(LoginRequiredMixin, CreateView):
+class AlbumCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     fields = ['name', 'description']
     model = models.Album
     success_url = reverse_lazy('albums:list')
+    success_message = "Albu  was created."
 
 
 class AlbumDetailView(LoginRequiredMixin, DetailView):
     model = models.Album
 
 
-class AlbumUpdateView(LoginRequiredMixin, UpdateView):
+class AlbumUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['name', 'description']
     model = models.Album
+    success_message = "Album was updated."
 
 
-class AlbumDeleteView(LoginRequiredMixin, DeleteView):
+class AlbumDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = models.Album
-    success_url = reverse_lazy('albums:list')
-
+    success_url = reverse_lazy('albums:list') 
+    success_message = "Album was deleted."
 
 
 def unsorted(request):
@@ -100,6 +103,6 @@ def remove_photos(request, pk):
                 photo = Photo.objects.get(id=photo_id)
                 album.photo_set.remove(photo)
                 album.save()
-            return JsonResponse({'message': "Photos have been removed from {}.".format(album.name)})
+            return JsonResponse(json.dumps(album))
     else: 
         return HttpResponseRedirect(reverse('album:detail', args=[pk]))
