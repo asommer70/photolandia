@@ -6,6 +6,8 @@ class Photo(models.Model):
     caption = models.TextField(max_length=2048, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    local_path = models.CharField(max_length=255, blank=True, null=True)
+    local_id = models.CharField(max_length=255, blank=True, null=True)
     albums = models.ManyToManyField(Album, blank=True, null=True)
 
     def filename(self):
