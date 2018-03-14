@@ -8,6 +8,11 @@
     <h1>{% if not form.instance.pk %}Add Photo{% else %}Edit {{form.instance.image.name}}{% endif %}</h1>
     <br/>
 
+    {% if form.instance.pk  and form.instance.image %}
+      <img src="{{form.instance.image.url}}" width="200"/>
+      <br/><br/>
+    {% endif %}
+
     {% if form.instance.pk %}
       <small><strong>Uploaded On:</strong> {{photo.created_at|date:"m/d/Y h:m:s"}}</small>
       <br/>

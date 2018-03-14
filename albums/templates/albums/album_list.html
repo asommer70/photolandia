@@ -22,7 +22,7 @@
               {{album.name}}
             </a>
             <br/>
-            {% if album.photo_set.first %}
+            {% if album.photo_set.first and album.photo_set.first.image %}
               <a href="{% url 'albums:detail' pk=album.id %}">
                 <img src="{{ album.photo_set.first.image.url }}" alt="{{album.name}}" />
               </a>

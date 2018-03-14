@@ -13,12 +13,19 @@
 
     <div class="photos" itemscope itemtype="http://schema.org/ImageGallery">
       {% for photo in album.photo_set.all %}
-          <figure class="thumbnail photo" data-id="{{photo.id}}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+        <figure class="thumbnail photo" data-id="{{photo.id}}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+          {% if photo.image %}
               <a href="{{photo.image.url}}" itemprop="contentUrl" data-size="{{photo.image.width}}x{{photo.image.height}}">
                   <img src="{{photo.image.url}}" itemprop="thumbnail" alt="{{photo.image.name}}" data-id="{{photo.id}}" />
               </a>
-              <figcaption itemprop="caption description">{{photo.caption|truncatechars:23}}</figcaption>
-          </figure>
+          {% else %}
+              <a href="{% url 'photos:update' pk=photo.id %}" itemprop="contentUrl" data-size="200x300">
+                  <img src="https://via.placeholder.com/150x250?text=No image... bad upload?" itemprop="thumbnail" alt="bad upload..." data-id="{{photo.id}}" />
+              </a>
+          {% endif %}
+          <figcaption itemprop="caption description">{{photo.caption|truncatechars:23}}</figcaption>
+        </figure>
+
       {% endfor %}
     </div>
 
