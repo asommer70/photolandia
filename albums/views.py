@@ -32,6 +32,15 @@ class AlbumCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class AlbumDetailView(LoginRequiredMixin, DetailView):
     model = models.Album
+    # photo_list = model.photo_set
+    # paginate_by = 20
+    def get_context_data(self,  *args, **kwargs):
+        context = super(AlbumDetailView, self).get_context_data(*args, **kwargs)
+        self.paginator = Paginator(self.model.photo_set.order_by('created_at'), 20)
+        return context
+        # print('self.reqeust.GET:', self.request.GET)
+        # self.model = models.Album.objects.get(pk=args['pk'])
+    # paginator = Paginator(model.photo_set, 10)
 
 
 class AlbumUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
