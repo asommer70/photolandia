@@ -10,9 +10,8 @@
   <a href="{% url 'albums:update' pk=album.id %}" class="button small float-right">Edit Album</a>
   <br/>
 
-    <p>page_obj: {{page_obj}}</p>
     <div class="photos" itemscope itemtype="http://schema.org/ImageGallery">
-      {% for photo in album.photo_set.all %}
+      {% for photo in photos %}
         <figure class="thumbnail photo" data-id="{{photo.id}}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
           {% if photo.image %}
               <a href="{{photo.image.url}}" itemprop="contentUrl" data-size="{{photo.image.width}}x{{photo.image.height}}">
@@ -27,19 +26,19 @@
         </figure>
 
       {% endfor %}
+    </div>
 
       <ul class="pagination text-center" role="navigation" aria-label="Pagination">
-        {% if page_obj.has_previous %}
-          <li class="pagination-previous"><a href="?page={{ page_obj.previous_page_number }}">Previous <span class="show-for-sr">page</span></a></li>
+        {% if photos.has_previous %}
+          <li class="pagination-previous"><a href="?page={{ photos.previous_page_number }}">Previous <span class="show-for-sr">page</span></a></li>
         {% endif %}
 
-          <li><a href="#" aria-label="Page {{page_obj.number}}">{{page_obj.number}}</a></li>
+          <li><a href="#" aria-label="Page {{photos.number}}">{{photos.number}}</a></li>
 
-        {% if page_obj.has_next %}
-          <li class="pagination-next"><a href="?page={{ page_obj.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% if photos.has_next %}
+          <li class="pagination-next"><a href="?page={{ photos.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
         {% endif %}
       </ul>
-    </div>
 
   <div class="reveal" id="selectModal" data-reveal>
     <h3>Photo Actions</h3>

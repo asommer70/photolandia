@@ -135,7 +135,6 @@ $(document).ready(function() {
             }
 
             linkEl = figureEl.children[0]; // <a> element
-
             size = linkEl.getAttribute('data-size').split('x');
 
             // create slide object
