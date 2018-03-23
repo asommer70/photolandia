@@ -106,10 +106,10 @@ def remove_photos(request, pk):
         else:
             album = models.Album.objects.get(id=pk)
             for photo_id in request.POST['photo_ids'].split(','):
-                print('photo_id:', photo_id)
+                print('remove_photos photo_id:', photo_id)
                 photo = Photo.objects.get(id=photo_id)
                 album.photo_set.remove(photo)
                 album.save()
-            return JsonResponse(json.dumps(album))
+            return JsonResponse({'message': "Photos have been removed from {}.".format(album.name)})
     else: 
         return HttpResponseRedirect(reverse('album:detail', args=[pk]))
