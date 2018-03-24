@@ -17,21 +17,21 @@ class IndexView(generic.RedirectView):
 
 @csrf_exempt
 def api_login(request):
-	if request.method == 'POST':
-		user = authenticate(username=request.POST['username'], password=request.POST['password'])
-		if user:
-			return JsonResponse({
-				'message': "Thank you for logging in.",
-				'id': user.id,
-				'username': user.username,
-				'token': user.auth_token.key
-			})
-		else:
-			return JsonResponse({
-				'message': 'Bad username or password.',
-				'id': None,
-				'username': None,
-				'token': None
-			})
-	else:
-		return HttpResponseRedirect(reverse('photos:list'))
+        print('request.POST:', request.POST)
+        if request.method == 'POST':
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            print('user:', user)
+            if user:
+                return JsonResponse({
+		    'message': "Thank you for logging in.",
+		    'id': user.id,
+		    'username': user.username,
+		    'token': user.auth_token.key
+		})
+            else:
+                return JsonResponse({
+		    'message': 'Bad username or password.',
+                    'id': None,
+                    'username': None,
+                    'token': None
+                })

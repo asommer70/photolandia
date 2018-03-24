@@ -6,7 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
+from django.http import Http404
 
 
 from . import models
@@ -60,7 +62,17 @@ class ListCreatePhoto(generics.ListCreateAPIView):
     
 
 class RetrieveUpdateDestroyPhoto(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Photo.objects.all()
     serializer_class = PhotoSerializer
     authentication_classes = (TokenAuthentication,)
+
+    def get(self, request, pk, format=None):
+        try:
+            photo = models.Photo.objects.get(pk=pk)
+        except models.Photo.DoesNotExist:
+            try:
+                photo = models.Photo.objects.get(local_id=pk)
+            except:
+                raise Http404
+        serializer = PhotoSerializer(photo)
+        return Response(serializer.data)
 
