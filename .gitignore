@@ -11,3 +11,6 @@ venv/
 node_modules/
 vendor/
 media/
+assets/admin/
+assets/rest_framework/
+
