@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node-sass -r -w ./scss/main.scss ../assets/css/main.css",
+    "start": "http-server",
     "vendor": "node index.js",
+    "sass:watch": "node-sass -r -w ./scss/main.scss ../assets/css/main.css",
     "sass": "node-sass -r ./scss/main.scss ./assets/css/main.css"
   },
   "repository": {
