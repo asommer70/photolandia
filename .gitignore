@@ -9,8 +9,7 @@ config.cfg
 venv/
 .env
 node_modules/
-vendor/
+#vendor/
 media/
 assets/admin/
 assets/rest_framework/
-
