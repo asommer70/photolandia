@@ -18,12 +18,12 @@
   "author": "Adam Sommer",
   "license": "MIT",
   "dependencies": {
-    "foundation-sites": "^6.4.4-rc1",
+    "foundation-sites": "^6.5.0",
     "jquery": "^3.3.1",
     "ncp": "^2.0.0",
     "photoswipe": "^4.1.2"
   },
   "devDependencies": {
-    "dragselect": "^1.7.21"
+    "dragselect": "^1.9.1"
   }
 }
